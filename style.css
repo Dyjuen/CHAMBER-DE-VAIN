@@ -274,15 +274,21 @@ footer {
     background-color: #111;
     color: white;
     border: none;
-    padding: 5px 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     cursor: pointer;
     font-size: 14px;
-    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
 
 .slider-nav button:hover {
     background-color: #ffdd00;
     color: #111;
+    transform: scale(1.1);
 }
 /* Lightbox Styles */
 .lightbox {
@@ -789,30 +795,36 @@ footer {
     margin-top: 2rem;
 }
 
+.social-links {
+    margin-top: 20px;
+}
+
 .social-links a {
     margin: 0 10px;
     color: #3498db;
     text-decoration: none;
     transition: color 0.3s;
+    font-size: 1.2rem;
 }
 
 .social-links a:hover {
     color: #2980b9;
 }
 
-.whatsapp-btn {
+.instagram-btn {
     display: inline-block;
-    background: #25D366;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
     margin-top: 1rem;
-    transition: background 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.whatsapp-btn:hover {
-    background: #128C7E;
+.instagram-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .contact-title {
