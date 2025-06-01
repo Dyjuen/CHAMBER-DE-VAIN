@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHMB - Fashion Brand</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <img class="logo" src="assets/chmb logo nav.PNG" alt="CHMB">
+                <ul>
+                    <li><a href="beranda.html">Beranda</a></li>
+                    <li><a href="produk.html">Produk</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                    <li style="position:relative;">
+                        <button id="cartBtn" style="background:none;border:none;cursor:pointer;position:relative;">
+                            <span style="font-size:1.3em;">🛒</span>
+                            <span id="cartCount" style="position:absolute;top:-8px;right:-10px;background:#ff3333;color:#fff;font-size:0.85em;padding:2px 7px;border-radius:50%;font-weight:bold;min-width:22px;text-align:center;">0</span>
+                        </button>
+                    </li>
+                    <li>
+                        <a href="index.html" id="logoutBtn" style="color:#ff3333;font-weight:bold;">Logout</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="hero">
+        <div class="container">
+            <h2>CHAMBRE DELA VAIN</h2>
+            <p>Fashion for the bold, the creative, and the authentic. Temukan koleksi terbaru kami yang siap membuatmu tampil beda setiap hari!</p>
+            <a href="produk.html" class="btn">Lihat Koleksi</a>
+        </div>
+    </section>
+
+    <!-- Promo Banner -->
+    <section class="promo-banner" style="background:#ffdd00;color:#111;text-align:center;padding:18px 0;">
+        <b>FLASH SALE:</b> Diskon 30% untuk koleksi baru! <a href="produk.html" style="color:#111;text-decoration:underline;">Lihat Promo</a>
+    </section>
+
+    <!-- Benefit Section -->
+    <section class="benefit-section" style="background:#fff;padding:40px 0;">
+        <div class="container" style="display:flex;flex-wrap:wrap;justify-content:center;gap:40px;">
+            <div style="flex:1;min-width:200px;max-width:300px;text-align:center;">
+                <img src="assets/CHMB.JPG" alt="Premium Quality" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;">
+                <h4>Bahan Premium</h4>
+                <p>Material berkualitas tinggi, nyaman dipakai seharian.</p>
+            </div>
+            <div style="flex:1;min-width:200px;max-width:300px;text-align:center;">
+                <img src="assets/gambar3.jpg" alt="Trendy Design" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;">
+                <h4>Desain Kekinian</h4>
+                <p>Model up-to-date, cocok untuk semua gaya dan usia.</p>
+            </div>
+            <div style="flex:1;min-width:200px;max-width:300px;text-align:center;">
+                <img src="assets/gambar5.jpg" alt="Affordable" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:10px;">
+                <h4>Harga Terjangkau</h4>
+                <p>Fashionable tanpa harus mahal. Banyak promo menarik!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonials" style="background:#f9f9f9;padding:50px 0;">
+        <div class="container">
+            <h2 style="text-align:center;margin-bottom:30px;">Apa Kata Pelanggan?</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:30px;justify-content:center;">
+                <div style="background:#fff;padding:20px 18px;border-radius:8px;max-width:320px;box-shadow:0 2px 8px #0001;text-align:center;">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Pelanggan 1" style="width:60px;height:60px;border-radius:50%;margin-bottom:10px;">
+                    <div style="color:#ffdd00;font-size:18px;">★★★★★</div>
+                    <p style="font-style:italic;">"Bajunya nyaman banget, pengiriman cepat, dan CS ramah! Bakal order lagi."</p>
+                    <h4 style="margin:10px 0 0 0;">Ahmad Syarif</h4>
+                </div>
+                <div style="background:#fff;padding:20px 18px;border-radius:8px;max-width:320px;box-shadow:0 2px 8px #0001;text-align:center;">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Pelanggan 2" style="width:60px;height:60px;border-radius:50%;margin-bottom:10px;">
+                    <div style="color:#ffdd00;font-size:18px;">★★★★★</div>
+                    <p style="font-style:italic;">"Modelnya kekinian, bahan adem, harga bersahabat. Recommended!"</p>
+                    <h4 style="margin:10px 0 0 0;">Sarah Amalia</h4>
+                </div>
+                <div style="background:#fff;padding:20px 18px;border-radius:8px;max-width:320px;box-shadow:0 2px 8px #0001;text-align:center;">
+                    <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Pelanggan 3" style="width:60px;height:60px;border-radius:50%;margin-bottom:10px;">
+                    <div style="color:#ffdd00;font-size:18px;">★★★★★</div>
+                    <p style="font-style:italic;">"Sudah langganan di CHMB, kualitas selalu memuaskan."</p>
+                    <h4 style="margin:10px 0 0 0;">Rizky Pratama</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="tentang" class="tentang">
+        <div class="container">
+            <h2>Tentang CHMB</h2>
+            <p>CHMB adalah brand fashion lokal yang mengusung gaya modern, edgy, dan autentik. Kami percaya bahwa fashion adalah ekspresi dari diri sendiri. Setiap koleksi kami dirancang untuk membuatmu tampil percaya diri dan unik di setiap kesempatan.</p>
+        </div>
+    </section>
+
+    <!-- CTA Footer -->
+    <section class="cta-footer" style="background:#111;color:#fff;padding:40px 0;text-align:center;">
+        <div class="container">
+            <h2>Siap Tampil Lebih Keren?</h2>
+            <a href="produk.html" class="btn" style="background:#ffdd00;color:#111;font-size:18px;padding:14px 36px;">Belanja Koleksi Sekarang</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CHMB. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

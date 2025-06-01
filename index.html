@@ -2,249 +2,26 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHMB - Fashion Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>CHMB - Login</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header class="sticky">
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <!-- Logo navbar sengaja dikosongin -->
+    <div class="login-container">
+        <div class="login-box">
+            <img src="assets/CHMB.JPG" alt="CHMB Logo">
+            <h1>Login ke CHMB</h1>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Username" required>
                 </div>
-                <ul>
-                    <li><a href="#hero">Beranda</a></li>
-                    <li><a href="#produk">Produk</a></li>
-                    <li><a href="#tentang">Tentang</a></li>
-                    <li><a href="#kontak">Kontak</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Bagian HERO (banner utama) -->
-    <section class="hero" id="hero">
-        <div class="container hero-flex">
-            <div class="hero-content">
-                <h1 class="fade-in">Tampil Stylish & Percaya Diri<br><span class="headline-text">Fashion For Everyone</span></h1>
-                <ul class="benefit-list fade-in">
-                    <li><i class="fas fa-check-circle"></i> Bahan Premium & Nyaman</li>
-                    <li><i class="fas fa-check-circle"></i> Model Kekinian</li>
-                    <li><i class="fas fa-check-circle"></i> Harga Terjangkau</li>
-                    <li><i class="fas fa-check-circle"></i> Pengiriman Cepat</li>
-                </ul>
-                <a href="#produk" class="btn fade-in">Belanja Sekarang <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="hero-image">
-                <img src="assets/CHMB.JPG" alt="Fashion Banner" loading="lazy">
-            </div>
-        </div>
-    </section>
-
-    <!-- Banner Promo (biar user langsung liat promo) -->
-    <section class="promo-banner sticky-promo">
-        <div class="container">
-            <span class="promo-text"><i class="fas fa-bolt"></i> <b>FLASH SALE:</b> Diskon 30% untuk koleksi baru! <a href="#produk">Lihat Promo</a></span>
-        </div>
-    </section>
-
-    <!-- Filter Bar (buat filter produk, bisa dihide kalau nggak dipakai) -->
-    <section class="filter-bar sticky-filter">
-        <div class="container">
-            <button class="filter-btn active">Semua</button>
-            <button class="filter-btn">Pria</button>
-            <button class="filter-btn">Wanita</button>
-            <button class="filter-btn">Unisex</button>
-            <button class="filter-btn">Promo</button>
-        </div>
-    </section>
-
-    <!-- Bagian Produk (katalog baju) -->
-    <section class="produk" id="produk">
-        <div class="container">
-            <div class="produk-grid">
-                <!-- Produk 1 -->
-                <div class="produk-item zoom">
-                    <span class="badge animate-badge">Baru</span>
-                    <div class="produk-carousel">
-                        <img src="assets/gambar1.jpg" alt="Baju Casual Pria" class="active">
-                        <img src="assets/gambar1belakang.jpg" alt="Baju Casual Pria Belakang">
-                        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
-                        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <h3>Baju Casual Pria</h3>
-                    <p>Bahan adem, cocok untuk sehari-hari. Tersedia berbagai ukuran.</p>
-                    <div class="price">Rp 120.000</div>
-                    <button class="btn-product quick-view" data-img="gambar1.jpg" data-title="Baju Casual Pria" data-price="Rp 120.000" data-desc="Bahan adem, cocok untuk sehari-hari. Tersedia berbagai ukuran.">Quick View</button>
-                    <a href="#" class="btn-product">Beli Sekarang</a>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
                 </div>
-                <!-- Produk 2 -->
-                <div class="produk-item zoom">
-                    <span class="badge animate-badge">Best Seller</span>
-                    <div class="produk-carousel">
-                        <img src="assets/gambar2.jpg" alt="Kemeja Flanel Wanita" class="active">
-                        <img src="assets/gambar2belakang.jpg" alt="Kemeja Flanel Wanita Belakang">
-                        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
-                        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <h3>Kemeja Flanel Wanita</h3>
-                    <p>Motif kekinian, nyaman dipakai, cocok untuk hangout.</p>
-                    <div class="price">Rp 135.000</div>
-                    <button class="btn-product quick-view" data-img="gambar2.jpg" data-title="Kemeja Flanel Wanita" data-price="Rp 135.000" data-desc="Motif kekinian, nyaman dipakai, cocok untuk hangout.">Quick View</button>
-                    <a href="#" class="btn-product">Beli Sekarang</a>
-                </div>
-                <!-- Produk 3 -->
-                <div class="produk-item zoom">
-                    <div class="produk-carousel">
-                        <img src="assets/gambar3.jpg" alt="Kaos Oversize Unisex" class="active">
-                        <img src="assets/gambar3slide2.jpg" alt="Kaos Oversize Unisex 2">
-                        <img src="assets/gambar3slide3.jpg" alt="Kaos Oversize Unisex 3">
-                        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
-                        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <h3>Kaos Oversize Unisex</h3>
-                    <p>Model oversized, bahan premium, pilihan warna trendy.</p>
-                    <div class="price">Rp 99.000</div>
-                    <button class="btn-product quick-view" data-img="gambar3.jpg" data-title="Kaos Oversize Unisex" data-price="Rp 99.000" data-desc="Model oversized, bahan premium, pilihan warna trendy.">Quick View</button>
-                    <a href="#" class="btn-product">Beli Sekarang</a>
-                </div>
-                <!-- Produk 4 -->
-                <div class="produk-item zoom">
-                    <span class="badge animate-badge">Baru</span>
-                    <div class="produk-carousel">
-                        <img src="assets/gambar4.jpg" alt="Hoodie Polos Premium" class="active">
-                        <img src="assets/gambar4slide2.jpg" alt="Hoodie Polos Premium 2">
-                        <button class="carousel-prev"><i class="fas fa-chevron-left"></i></button>
-                        <button class="carousel-next"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <h3>Hoodie Polos Premium</h3>
-                    <p>Hangat dan stylish, cocok untuk musim hujan.</p>
-                    <div class="price">Rp 175.000</div>
-                    <button class="btn-product quick-view" data-img="gambar4.jpg" data-title="Hoodie Polos Premium" data-price="Rp 175.000" data-desc="Hangat dan stylish, cocok untuk musim hujan.">Quick View</button>
-                    <a href="#" class="btn-product">Beli Sekarang</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- TESTIMONIALS -->
-    <section class="testimonials">
-        <div class="container">
-            <h2>Testimoni Pelanggan</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-item animate-fadeInUp">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Pelanggan 1">
-                    <div class="stars">★★★★★</div>
-                    <p>"Bajunya nyaman banget, pengiriman cepat, dan CS ramah! Bakal order lagi."</p>
-                    <h4>Ahmad Syarif</h4>
-                </div>
-                <div class="testimonial-item animate-fadeInUp">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Pelanggan 2">
-                    <div class="stars">★★★★★</div>
-                    <p>"Modelnya kekinian, bahan adem, harga bersahabat. Recommended!"</p>
-                    <h4>Sarah Amalia</h4>
-                </div>
-                <div class="testimonial-item animate-fadeInUp">
-                    <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Pelanggan 3">
-                    <div class="stars">★★★★★</div>
-                    <p>"Sudah langganan di CHMB, kualitas selalu memuaskan."</p>
-                    <h4>Rizky Pratama</h4>
-                </div>
-            </div>
-        </div>
-    </section>
+                <button type="submit" class="login-btn">Masuk</button>
+            </form>
+            <div id="errorMessage" class="error-message">Username atau password salah</div>
+        </div>    </div>
 
-    <!-- ABOUT SECTION -->
-    <section class="tentang diagonal-divider" id="tentang">
-        <div class="container">
-            <h2>Tentang Kami</h2>
-            <p>CHMB adalah fashion store yang berfokus pada produk baju berkualitas, desain modern, dan pelayanan terbaik. Kami siap membuatmu tampil percaya diri setiap hari!</p>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section class="kontak" id="kontak">
-        <div class="container">
-            <h2>Kontak</h2>
-            <p>Hubungi kami untuk informasi lebih lanjut</p>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:info@chmb.com"><i class="far fa-envelope"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA FOOTER -->
-    <section class="cta-footer">
-        <div class="container">
-            <h2>Siap Tampil Lebih Keren?</h2>
-            <a href="#produk" class="btn btn-lg">Belanja Koleksi Sekarang</a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            &copy; 2025 CHMB Fashion Store. All rights reserved.
-        </div>
-    </footer>
-
-    <script>
-        // Animasi fade-in saat scroll
-        const faders = document.querySelectorAll('.fade-in');
-        const appearOptions = { threshold: 0.2 };
-        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('appear');
-                appearOnScroll.unobserve(entry.target);
-            });
-        }, appearOptions);
-        faders.forEach(fader => { appearOnScroll.observe(fader); });
-
-        // Modal Quick View Produk
-        const modal = document.getElementById('quickViewModal');
-        const modalImg = document.getElementById('modalImg');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalPrice = document.getElementById('modalPrice');
-        const modalDesc = document.getElementById('modalDesc');
-        document.querySelectorAll('.quick-view').forEach(btn => {
-            btn.addEventListener('click', function() {
-                modalImg.src = this.dataset.img;
-                modalTitle.textContent = this.dataset.title;
-                modalPrice.textContent = this.dataset.price;
-                modalDesc.textContent = this.dataset.desc;
-                modal.classList.add('active');
-            });
-        });
-        document.querySelector('.close-modal').onclick = () => modal.classList.remove('active');
-        window.onclick = e => { if(e.target === modal) modal.classList.remove('active'); };
-
-        // Filter Bar (dummy, for UI only)
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.onclick = function() {
-                document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-                this.classList.add('active');
-            };
-        });
-
-        // Carousel Produk
-        document.querySelectorAll('.produk-carousel').forEach(carousel => {
-            const imgs = carousel.querySelectorAll('img');
-            let idx = 0;
-            const prev = carousel.querySelector('.carousel-prev');
-            const next = carousel.querySelector('.carousel-next');
-            function showImg(i) {
-                imgs.forEach((img, n) => img.classList.toggle('active', n === i));
-            }
-            if(prev && next) {
-                prev.onclick = e => { e.stopPropagation(); idx = (idx-1+imgs.length)%imgs.length; showImg(idx); };
-                next.onclick = e => { e.stopPropagation(); idx = (idx+1)%imgs.length; showImg(idx); };
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

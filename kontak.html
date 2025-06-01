@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHMB - Kontak</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <img class="logo" src="assets/chmb logo nav.PNG" alt="CHMB">
+                <ul>
+                    <li><a href="beranda.html">Beranda</a></li>
+                    <li><a href="produk.html">Produk</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                    <li style="position:relative;">
+                        <button id="cartBtn" style="background:none;border:none;cursor:pointer;position:relative;">
+                            <span style="font-size:1.3em;">🛒</span>
+                            <span id="cartCount" style="position:absolute;top:-8px;right:-10px;background:#ff3333;color:#fff;font-size:0.85em;padding:2px 7px;border-radius:50%;font-weight:bold;min-width:22px;text-align:center;">0</span>
+                        </button>
+                    </li>
+                    <li><a href="index.html" id="logoutBtn" style="color:#ff3333;font-weight:bold;">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="contact-container">
+        <h1 class="contact-title">Contact Us</h1>
+        
+        <div class="contact-info">
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Visit Us</h3>
+                <p>Monas, Jakarta</p>
+                <p>Indonesia</p>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email Us</h3>
+                <p>info@chamberdevain.com</p>
+                <div class="social-links">
+                    <a href="mailto:info@chamberdevain.com"><i class="fas fa-envelope"></i></a>
+                    <a href="https://instagram.com/chamberdevain" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/628516821462" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fab fa-whatsapp"></i>
+                <h3>WhatsApp</h3>
+                <p>+62 851-5682-1462</p>
+                <a href="https://wa.me/6285156821462" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Chat with Us
+                </a>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.666466290089!2d106.82443147575666!3d-6.175387093774269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2ad6e1e0e9bcc8!2sMonumen%20Nasional!5e0!3m2!1sen!2sid!4v1690367391717!5m2!1sen!2sid"
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CHMB. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
