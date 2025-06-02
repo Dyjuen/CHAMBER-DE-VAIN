@@ -60,12 +60,31 @@ header nav a:hover {
 
 /* Hero Section */
 .hero {
-    background-image: url('assets/bg1.jpg'); /* Ganti dengan gambar hero kamu */
     background-size: cover;
     background-position: center;
     color: #ffffff;
     padding: 200px 0;
     text-align: center;
+    box-shadow: 20px 20px 10px gray;
+    animation: slider 15s linear infinite alternate;
+}
+
+@keyframes slider {
+    0% {
+        background-image: url('assets/bg1.jpg');
+    }
+    25% {
+        background-image: url('assets/bg2.jpg');
+    }
+    50% {
+        background-image: url('assets/bg6.jpg');
+    }
+    75% {
+        background-image: url('assets/bg4.jpg');
+    }
+    100% {
+        background-image: url('assets/bg5.jpg');
+    }
 }
 
 .hero h2 {
