@@ -766,6 +766,12 @@ footer {
     padding: 0 1rem;
 }
 
+.contact-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
 .contact-info {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -830,5 +836,143 @@ footer {
 .contact-title {
     text-align: center;
     margin-bottom: 2rem;
+}
+
+/* Cart Button Styles */
+nav li:has(#cartBtn) {
+    position: relative;
+}
+
+#cartBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+#cartBtn span:first-child {
+    font-size: 1.3em;
+}
+
+#cartCount {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #ff3333;
+    color: #fff;
+    font-size: 0.85em;
+    padding: 2px 7px;
+    border-radius: 50%;
+    font-weight: bold;
+    min-width: 22px;
+    text-align: center;
+}
+
+#logoutBtn {
+    color: #ff3333;
+    font-weight: bold;
+}
+
+/* Promo Banner */
+.promo-banner {
+    background: #ffdd00;
+    color: #111;
+    text-align: center;
+    padding: 18px 0;
+}
+
+.promo-banner a {
+    color: #111;
+    text-decoration: underline;
+}
+
+/* Benefit Section */
+.benefit-section {
+    background: #fff;
+    padding: 40px 0;
+}
+
+.benefit-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.benefit-item {
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    text-align: center;
+}
+
+.benefit-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Testimonials */
+.testimonials {
+    background: #f9f9f9;
+    padding: 50px 0;
+}
+
+.testimonials h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.testimonials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.testimonial-card {
+    background: #fff;
+    padding: 20px 18px;
+    border-radius: 8px;
+    max-width: 320px;
+    box-shadow: 0 2px 8px #0001;
+    text-align: center;
+}
+
+.testimonial-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.testimonial-card .rating {
+    color: #ffdd00;
+    font-size: 18px;
+}
+
+.testimonial-card p {
+    font-style: italic;
+}
+
+.testimonial-card h4 {
+    margin: 10px 0 0 0;
+}
+
+/* Home CTA Section */
+.home-cta {
+    background: #111;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.home-cta .btn {
+    background: #ffdd00;
+    color: #111;
+    font-size: 18px;
+    padding: 14px 36px;
 }
 
