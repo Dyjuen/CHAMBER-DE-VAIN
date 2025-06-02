@@ -314,3 +314,56 @@ function handleLogin(event) {
     
     return false;
 }
+
+// Scroll Animation Observer
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize scroll animations with more generous margins
+    const observerOptions = {
+        root: null,
+        rootMargin: '50px', // Increased margin to detect elements sooner
+        threshold: 0.1 // Lower threshold to trigger earlier
+    };
+
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('scroll-animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Function to prepare element for animation
+    function prepareForAnimation(element, delay = 0) {
+        element.classList.add('scroll-animate');
+        element.style.transitionDelay = `${delay}s`;
+        scrollObserver.observe(element);
+    }
+
+    // Observe hero section elements
+    const heroElements = document.querySelectorAll('.hero h2, .hero p, .hero .btn');
+    heroElements.forEach((el, index) => {
+        prepareForAnimation(el, index * 0.2);
+    });
+
+    // Observe benefit items
+    document.querySelectorAll('.benefit-item').forEach((el, index) => {
+        prepareForAnimation(el, index * 0.2);
+    });
+
+    // Observe testimonial cards
+    document.querySelectorAll('.testimonial-card').forEach((el, index) => {
+        prepareForAnimation(el, index * 0.2);
+    });
+
+    // Observe about section
+    document.querySelectorAll('.tentang h2, .tentang p').forEach((el, index) => {
+        prepareForAnimation(el, index * 0.2);
+    });
+
+    // Observe CTA section
+    const ctaElements = document.querySelectorAll('.home-cta .container h2, .home-cta .container .btn');
+    ctaElements.forEach((el, index) => {
+        prepareForAnimation(el, index * 0.2);
+    });
+});

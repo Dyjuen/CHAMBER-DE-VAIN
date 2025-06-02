@@ -1070,8 +1070,8 @@ nav li:has(#cartBtn) {
 }
 
 .testimonial-card img {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     margin-bottom: 10px;
 }
@@ -1283,3 +1283,41 @@ nav a:hover, nav button:hover {
     opacity: 0;
 }
 
+/* Scroll Animation Base States */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-animate.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Apply to specific sections with default visible state */
+.hero h2, 
+.hero p, 
+.hero .btn,
+.benefit-item,
+.testimonial-card,
+.tentang h2,
+.tentang p,
+.home-cta .container * {
+    opacity: 1; /* Start visible by default */
+    transform: translateY(0); /* Start at final position */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Only hide elements when they have the scroll-animate class */
+.hero h2.scroll-animate, 
+.hero p.scroll-animate, 
+.hero .btn.scroll-animate,
+.benefit-item.scroll-animate,
+.testimonial-card.scroll-animate,
+.tentang h2.scroll-animate,
+.tentang p.scroll-animate,
+.home-cta .container.scroll-animate * {
+    opacity: 0;
+    transform: translateY(20px);
+}
