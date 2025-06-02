@@ -228,6 +228,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize cart sidebar
     renderCartSidebar();
+
+    // Set product item animation indices
+    document.querySelectorAll('.produk-item').forEach((item, index) => {
+        item.style.setProperty('--item-index', index);
+    });
 });
 
 function showPurchaseConfirmation() {

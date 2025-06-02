@@ -58,6 +58,32 @@ header nav a:hover {
     color: #ffdd00;
 }
 
+/* Button Link Styles */
+a.btn {
+    text-decoration: none;
+}
+
+/* Navigation Animation Enhancements */
+nav a {
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #ffdd00;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
 /* Hero Section */
 .hero {
     background-size: cover;
@@ -87,15 +113,31 @@ header nav a:hover {
     }
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .hero h2 {
     font-size: 50px;
     margin-bottom: 50px;
-    text-shadow: 0 0 10px #222
+    text-shadow: 0 0 10px #222;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 .hero p {
     font-size: 18px;
     margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.2s;
+    text-shadow: 0 0 10px #222;
 }
 
 .hero .btn {
@@ -106,6 +148,8 @@ header nav a:hover {
     font-weight: bold;
     border-radius: 5px;
     transition: background 0.3s;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.4s;
 }
 
 .hero .btn:hover {
@@ -136,6 +180,19 @@ header nav a:hover {
     padding: 15px;
     text-align: center;
     border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateY(0);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    opacity: 0;
+    animation: fadeInScale 0.6s ease forwards;
+    animation-delay: calc(var(--item-index, 0) * 0.1s);
+}
+
+.produk-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 .produk-item img {
@@ -143,6 +200,11 @@ header nav a:hover {
     height: auto;
     border-radius: 5px;
     margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.produk-item:hover img {
+    transform: scale(1.05);
 }
 
 .produk-item h3 {
@@ -152,6 +214,17 @@ header nav a:hover {
 
 .produk-item p {
     color: #555;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* Tentang & Kontak */
@@ -435,6 +508,7 @@ footer {
     width: 100%;
 }
 .btn-buy {
+    margin-top: auto;  /* This will push the button to the bottom */
     background: linear-gradient(90deg, #ffdd00 60%, #ffe066 100%);
     color: #111;
     font-weight: bold;
@@ -442,17 +516,41 @@ footer {
     border-radius: 6px;
     padding: 10px 0;
     cursor: pointer;
-    margin-top: 10px;
     margin-bottom: 0;
     box-shadow: 0 2px 8px #0001;
     transition: background 0.2s, transform 0.1s;
     width: 100%;
     font-size: 1rem;
     letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+.btn-buy:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
 }
 .btn-buy:hover {
     background: linear-gradient(90deg, #ffe066 60%, #ffdd00 100%);
-    transform: translateY(-2px) scale(1.03);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.btn-buy:hover:before {
+    left: 100%;
+}
+.btn-buy:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 #closeBuyForm {
@@ -565,7 +663,7 @@ footer {
     border: 1px solid #ccc;
 }
 .product-info-content .btn {
-    background: #ffdd00;
+    background: linear-gradient(90deg, #ffdd00 60%, #ffe066 100%);
     color: #111;
     font-weight: bold;
     border: none;
@@ -573,10 +671,21 @@ footer {
     padding: 10px 0;
     cursor: pointer;
     margin-bottom: 0;
-    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
+
 .product-info-content .btn:hover {
-    background: #fff200;
+    background: linear-gradient(90deg, #ffe066 60%, #ffdd00 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-info-content .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 #cancelProductInfoBtn {
     background: linear-gradient(90deg, #eee 60%, #f5f5f5 100%);
@@ -993,5 +1102,184 @@ nav li:has(#cartBtn) {
     color: #111;
     font-size: 18px;
     padding: 14px 36px;
+}
+
+/* Base Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Navigation Animations */
+nav a, nav button {
+    transition: transform 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffdd00;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover, nav button:hover {
+    transform: translateY(-2px);
+}
+
+#cartBtn {
+    transition: transform 0.2s ease;
+}
+
+#cartBtn:hover {
+    transform: scale(1.1);
+}
+
+#cartCount {
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Specific logout button animation */
+#logoutBtn::after {
+    background-color: #ff3333;
+}
+
+#logoutBtn:hover {
+    color: #ff3333;
+    text-decoration: none;
+}
+
+/* Modal Animations */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(5px);
+    }
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Product Info Modal */
+.product-info-modal {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(0);
+}
+
+.product-info-modal:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    animation: modalFadeIn 0.3s ease forwards;
+}
+
+.product-info-content {
+    animation: modalSlideUp 0.4s ease;
+}
+
+/* Lightbox Modal */
+.lightbox {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.lightbox:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    animation: modalFadeIn 0.3s ease forwards;
+}
+
+.lightbox img {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.lightbox:not(.hidden) img {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.lightbox .close-btn {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.lightbox .close-btn:hover {
+    transform: rotate(90deg);
+    color: #ffdd00;
+}
+
+.lightbox-nav button {
+    transition: all 0.2s ease;
+}
+
+.lightbox-nav button:hover {
+    background-color: #ffdd00;
+    transform: scale(1.1);
+}
+
+/* Product Grid Animations */
+.produk-item {
+    opacity: 0;
+    animation: fadeInScale 0.6s ease forwards;
+    animation-delay: calc(var(--item-index, 0) * 0.1s);
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Enhanced Button Animations */
+.btn, .btn-buy {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after, .btn-buy::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn:active::after, .btn-buy:active::after {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
 }
 
