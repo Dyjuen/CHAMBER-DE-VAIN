@@ -60,13 +60,17 @@
         <div class="container">
             <p>&copy; 2025 CHMB. All rights reserved.</p>
         </div>
-    </footer>
-    <!-- Cart Sidebar -->
+c    </footer>    <!-- Cart Sidebar -->
     <div id="cartSidebar" class="cart-sidebar hidden">
         <span class="close-btn" id="closeCartSidebar">×</span>
         <h4>Keranjang Anda</h4>
         <div id="cartSidebarContent">Keranjang kosong.</div>
+        <div id="promoCodeSection" class="promo-section" style="padding: 15px; border-top: 1px solid #eee;">
+            <input type="text" id="promoCode" placeholder="Masukkan kode promo" style="width: 70%; padding: 8px; margin-right: 8px;">
+            <button id="applyPromoBtn" style="padding: 8px 12px; background: #ffdd00; border: none; cursor: pointer; color:black;">Apply</button>
+        </div>
     </div>
+
     <!-- Purchase Confirmation Alert -->
     <div id="purchaseAlert" class="purchase-alert hidden">
         <div class="purchase-alert-content">
@@ -76,6 +80,7 @@
             <button id="cancelPurchaseBtn">Batal</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

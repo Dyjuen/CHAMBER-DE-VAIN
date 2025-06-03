@@ -39,7 +39,7 @@
     </section>
 
     <!-- Promo Banner -->    <section class="promo-banner">
-        <b>FLASH SALE:</b> Diskon 30% untuk koleksi baru! <a href="produk.html">Lihat Promo</a>
+        <b>FLASH SALE:</b> Diskon 30% untuk KODE PROMO :  <a href="produk.html">"CHAMBRESUKSES"</a> !
     </section>
 
     <!-- Benefit Section -->
@@ -94,8 +94,18 @@
         <div class="container">
             <h2>Tentang CHMB</h2>
             <p>CHMB adalah brand fashion lokal yang mengusung gaya modern, edgy, dan autentik. Kami percaya bahwa fashion adalah ekspresi dari diri sendiri. Setiap koleksi kami dirancang untuk membuatmu tampil percaya diri dan unik di setiap kesempatan.</p>
+            <div style="position:relative;width:100%;max-width:700px;margin:auto; margin-top:30px">
+            <iframe width="100%" height="400" style="border-radius:16px;display:block;"
+                src="https://www.youtube.com/embed/ltNk72movPg?autoplay=1&mute=1&loop=1&playlist=ltNk72movPg"
+                title="Video Produk CHMB" frameborder="0"
+                allow="autoplay; encrypted-media" allowfullscreen>
+            </iframe>
+            <div style="position:absolute;top:16px;left:0;width:100%;text-align:center;z-index:1;color:#fff;text-shadow:0 2px 8px #000;">
+            </div>
+        </div>
         </div>
     </section>
+
 
     <!-- CTA Footer -->    <section class="cta-footer home-cta">
         <div class="container">
@@ -108,13 +118,19 @@
         <div class="container">
             <p>&copy; 2025 CHMB. All rights reserved.</p>
         </div>
-    </footer>    
+    </footer>        
+    
     <!-- Cart Sidebar -->
     <div id="cartSidebar" class="cart-sidebar hidden">
         <span class="close-btn" id="closeCartSidebar">×</span>
         <h4>Keranjang Anda</h4>
         <div id="cartSidebarContent">Keranjang kosong.</div>
+        <div id="promoCodeSection" class="promo-section" style="padding: 15px; border-top: 1px solid #eee;">
+            <input type="text" id="promoCode" placeholder="Masukkan kode promo" style="width: 70%; padding: 8px; margin-right: 8px;">
+            <button id="applyPromoBtn" style="padding: 8px 12px; background: #ffdd00; border: none; cursor: pointer;">Apply</button>
+        </div>
     </div>
+
     <!-- Purchase Confirmation Alert -->
     <div id="purchaseAlert" class="purchase-alert hidden">
         <div class="purchase-alert-content">
@@ -124,6 +140,7 @@
             <button id="cancelPurchaseBtn">Batal</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -55,12 +55,24 @@ function nextLightbox() {
 
 // --- GLOBAL CART LOGIC ---
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+let promoApplied = false;
+const PROMO_CODE = 'CHAMBRESUKSES';
+const PROMO_DISCOUNT = 0.3;
+
 function formatRupiah(num) {
     return 'Rp' + num.toLocaleString('id-ID');
 }
 
 function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function calculateTotal(items) {
+    let total = items.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    if (promoApplied) {
+        total = total * (1 - PROMO_DISCOUNT);
+    }
+    return total;
 }
 
 function showCartSidebar() {
@@ -96,11 +108,11 @@ function renderCartSidebar() {
         return;
     }
 
-    let total = 0;
+    let subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    let total = calculateTotal(cart);
     let html = '<div class="p-4">';
     
     cart.forEach((item, index) => {
-        total += item.price * item.qty;
         html += `
             <div class="mb-4 p-2 border-b">
                 <h3 class="font-semibold">${item.title}</h3>
@@ -114,7 +126,9 @@ function renderCartSidebar() {
 
     html += `
         <div class="mt-4 pt-4 border-t">
-            <h3 class="font-semibold">Total: ${formatRupiah(total)}</h3>
+            <h3 class="font-semibold">Subtotal: ${formatRupiah(subtotal)}</h3>
+            ${promoApplied ? `<p style="color: #4CAF50;">Promo ditambahkan: -${PROMO_DISCOUNT * 100}%</p>` : ''}
+            <h3 class="font-semibold" style="margin-top: 10px;">Total: ${formatRupiah(total)}</h3>
             <button id="buyAllBtn" class="btn-buy" style="margin-top:16px;background:linear-gradient(90deg, #ffdd00 60%, #ffe066 100%);padding:12px 0;font-size:1rem;letter-spacing:0.5px;color:#111;">Beli Sekarang</button>
         </div>
     </div>`;
@@ -168,6 +182,25 @@ function initializeCart() {
     const closeCartSidebar = document.getElementById('closeCartSidebar');
     if (closeCartSidebar) {
         closeCartSidebar.onclick = hideCartSidebar;
+    }
+
+    // Initialize promo code button
+    const applyPromoBtn = document.getElementById('applyPromoBtn');
+    if (applyPromoBtn) {
+        applyPromoBtn.onclick = function() {
+            const promoInput = document.getElementById('promoCode');
+            if (!promoInput) return;
+
+            const enteredCode = promoInput.value.trim().toUpperCase();
+            if (enteredCode === PROMO_CODE) {
+                promoApplied = true;
+                alert('Kode promo berhasil digunakan! Anda mendapat diskon 30%');
+                renderCartSidebar();
+            } else {
+                alert('Kode promo tidak valid!');
+            }
+            promoInput.value = '';
+        };
     }
 
     // Initialize cart sidebar
@@ -334,10 +367,10 @@ function showPurchaseConfirmation() {
     
     // Generate purchase details HTML
     let detailsHtml = '<div class="purchase-items" style="max-height:60vh;overflow-y:auto;">';
-    let total = 0;
+    let subtotal = 0;
     
     cart.forEach(item => {
-        total += item.price * item.qty;
+        subtotal += item.price * item.qty;
         detailsHtml += `
             <div class="purchase-item" style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee;">
                 <h4 style="font-weight:600;margin-bottom:4px;">${item.title}</h4>
@@ -347,10 +380,13 @@ function showPurchaseConfirmation() {
             </div>
         `;
     });
-    
+
+    let total = calculateTotal(cart);
     detailsHtml += `
         <div class="purchase-total" style="margin-top:16px;padding-top:12px;border-top:2px solid #ddd;">
-            <h3 style="font-weight:bold;">Total: ${formatRupiah(total)}</h3>
+            <h3 style="font-weight:bold;">Subtotal: ${formatRupiah(subtotal)}</h3>
+            ${promoApplied ? `<p style="color: #4CAF50;margin:8px 0;">Promo applied: -${PROMO_DISCOUNT * 100}%</p>` : ''}
+            <h3 style="font-weight:bold;margin-top:8px;">Total: ${formatRupiah(total)}</h3>
         </div>
     `;
     
@@ -360,8 +396,10 @@ function showPurchaseConfirmation() {
     // Handle purchase confirmation
     confirmPurchaseBtn.onclick = function() {
         purchaseAlert.classList.add('hidden');
-        setTimeout(() => {            alert('Pembelian berhasil! Terima kasih telah berbelanja.');
+        setTimeout(() => {
+            alert('Pembelian berhasil! Terima kasih telah berbelanja.');
             cart = [];
+            promoApplied = false; // Reset promo code after purchase
             saveCart();
             const cartCount = document.getElementById('cartCount');
             if (cartCount) cartCount.textContent = '0';
@@ -378,28 +416,52 @@ function showPurchaseConfirmation() {
 
 // --- Login Page Logic ---
 const users = [
-    { username: "juen", password: "juen" },
-    { username: "agung", password: "agung" },
-    { username: "putra", password: "putra" },
-    { username: "sam", password: "sam" },
-    { username: "yopan", password: "yopan" }
+    { username: "Juen Denardy", password: "2407411068" },
+    { username: "Putra Nugraha", password: "2407411070" },
+    { username: "Muhammad Agung Somomiharjo", password: "2407411079" },
+    { username: "Muhammad Syafri Syamsuddin", password: "2407411085" },
+    { username: "Yovana Ibnu Sina", password: "2407411059" }
 ];
+
+let attempts = parseInt(localStorage.getItem('loginAttempts') || '0');
+const maxAttempts = 3;
 
 function handleLogin(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const errorMessage = document.getElementById('errorMessage');
+
+    if (username === '' || password === '') {
+        errorMessage.textContent = 'Username dan Password tidak boleh kosong!';
+        errorMessage.style.display = 'block';
+        return false;
+    }
     
+    // Check if user exists in users array
     const user = users.find(u => u.username === username && u.password === password);
-    
     if (user) {
         // Successful login
-        errorMessage.style.display = 'none';
+        attempts = 0;
+        localStorage.setItem('loginAttempts', attempts);
         window.location.href = 'beranda.html';
+        return false;
     } else {
-        // Failed login
-        errorMessage.style.display = 'block';
+        attempts++;
+        localStorage.setItem('loginAttempts', attempts);
+        
+        if (attempts >= maxAttempts) {
+            alert('Anda telah mencapai batas maksimal percobaan login! Anda akan dialihkan ke halaman ganti password.');
+            window.location.href = 'passwordbaru.html';
+            return false;
+        } else {
+            errorMessage.textContent = `Username atau Password salah! Percobaan ke-${attempts} dari 3.`;
+            errorMessage.style.display = 'block';
+            document.getElementById('password').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('username').focus();
+            return false;
+        }
     }
     
     return false;
