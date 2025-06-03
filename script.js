@@ -1,14 +1,3 @@
-// Script for slider scroll (first version)
-function slideLeft(button) {
-    const slider = button.closest('.slider-container').querySelector('.slider-images');
-    slider.scrollBy({ left: -200, behavior: 'smooth' });
-}
-
-function slideRight(button) {
-    const slider = button.closest('.slider-container').querySelector('.slider-images');
-    slider.scrollBy({ left: 200, behavior: 'smooth' });
-}
-
 // PERULANGAN SLIDE (second version, with transform)
 function slideLeft(button) {
     const slider = button.closest('.slider-container').querySelector('.slider-images');
