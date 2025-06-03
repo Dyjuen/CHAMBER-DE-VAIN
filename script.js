@@ -65,12 +65,133 @@ function nextLightbox() {
 }
 
 // --- GLOBAL CART LOGIC ---
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 function formatRupiah(num) {
     return 'Rp' + num.toLocaleString('id-ID');
 }
 
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function showCartSidebar() {
+    const cartSidebar = document.getElementById('cartSidebar');
+    if (cartSidebar) {
+        renderCartSidebar();
+        cartSidebar.classList.remove('hidden');
+        setTimeout(() => {
+            cartSidebar.classList.add('show');
+        }, 10);
+    }
+}
+
+function hideCartSidebar() {
+    const cartSidebar = document.getElementById('cartSidebar');
+    if (cartSidebar) {
+        cartSidebar.classList.remove('show');
+        setTimeout(() => {
+            cartSidebar.classList.add('hidden');
+        }, 300);
+    }
+}
+
+function renderCartSidebar() {
+    const cartSidebarContent = document.getElementById('cartSidebarContent');
+    if (!cartSidebarContent) return;
+    
+    if (cart.length === 0) {
+        cartSidebarContent.innerHTML = '<p class="text-center p-4">Keranjang kosong.</p>';
+        // Update cart count
+        const cartCount = document.getElementById('cartCount');
+        if (cartCount) cartCount.textContent = '0';
+        return;
+    }
+
+    let total = 0;
+    let html = '<div class="p-4">';
+    
+    cart.forEach((item, index) => {
+        total += item.price * item.qty;
+        html += `
+            <div class="mb-4 p-2 border-b">
+                <h3 class="font-semibold">${item.title}</h3>
+                <p>Size: ${item.size}</p>
+                <p>Quantity: ${item.qty}</p>
+                <p>Price: ${formatRupiah(item.price * item.qty)}</p>
+                <button onclick="removeFromCart(${index})" class="text-red-500 mt-2">Remove</button>
+            </div>
+        `;
+    });
+
+    html += `
+        <div class="mt-4 pt-4 border-t">
+            <h3 class="font-semibold">Total: ${formatRupiah(total)}</h3>
+            <button id="buyAllBtn" class="btn-buy" style="margin-top:16px;background:linear-gradient(90deg, #ffdd00 60%, #ffe066 100%);padding:12px 0;font-size:1rem;letter-spacing:0.5px;color:#111;">Beli Sekarang</button>
+        </div>
+    </div>`;
+
+    cartSidebarContent.innerHTML = html;
+    
+    // Update cart count
+    const cartCount = document.getElementById('cartCount');
+    if (cartCount) {
+        cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+    
+    // Add click handler for buy button
+    const buyAllBtn = document.getElementById('buyAllBtn');
+    if (buyAllBtn) {
+        buyAllBtn.onclick = showPurchaseConfirmation;
+    }
+}
+
+// Make removeFromCart globally accessible
+window.removeFromCart = function(index) {
+    cart.splice(index, 1);
+    saveCart();
+    renderCartSidebar();
+    if (cart.length === 0) {
+        hideCartSidebar();
+    }
+};
+
+// Initialize cart functionality
+function initializeCart() {
+    // Update cart count on page load
+    const cartCount = document.getElementById('cartCount');
+    if (cartCount) {
+        cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+    }
+
+    // Initialize cart button
+    const cartBtn = document.getElementById('cartBtn');
+    if (cartBtn) {
+        cartBtn.onclick = function() {
+            if (!document.getElementById('cartSidebar').classList.contains('show')) {
+                showCartSidebar();
+            } else {
+                hideCartSidebar();
+            }
+        };
+    }
+
+    // Initialize close cart button
+    const closeCartSidebar = document.getElementById('closeCartSidebar');
+    if (closeCartSidebar) {
+        closeCartSidebar.onclick = hideCartSidebar;
+    }
+
+    // Initialize cart sidebar
+    renderCartSidebar();
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize cart functionality if cart elements exist
+    if (document.getElementById('cartBtn')) {
+        initializeCart();
+    }
+
+    // Initialize product info modal elements
     const productInfoModal = document.getElementById('productInfoModal');
     const modalProductTitle = document.getElementById('modalProductTitle');
     const modalProductDetails = document.getElementById('modalProductDetails');
@@ -80,10 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const addToCartBtn = document.getElementById('addToCartBtn');
     const cancelProductInfoBtn = document.getElementById('cancelProductInfoBtn');
     const closeProductInfoModal = document.getElementById('closeProductInfoModal');
-    const cartSidebar = document.getElementById('cartSidebar');
-    const cartSidebarContent = document.getElementById('cartSidebarContent');
-    const closeCartSidebar = document.getElementById('closeCartSidebar');
-    const cartBtn = document.getElementById('cartBtn');
 
     // Example product info data (expand as needed)
     const productInfoData = {
@@ -147,13 +264,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (buyAllBtn) {
             buyAllBtn.onclick = showPurchaseConfirmation;
         }
-    }
-
-    // Make removeFromCart globally accessible
+    }    // Make removeFromCart globally accessible
     window.removeFromCart = function(index) {
         cart.splice(index, 1);
+        saveCart();
         const cartCount = document.getElementById('cartCount');
-        if (cartCount) cartCount.textContent = cart.length;
+        if (cartCount) cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
         renderCartSidebar();
         if (cart.length === 0) {
             hideCartSidebar();
@@ -189,12 +305,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const found = cart.find(item => item.title === currentModalProduct.title && item.size === size);
         if (found) {
             found.qty += qty;
-        } else {
-            cart.push({ title: currentModalProduct.title, price: currentModalProduct.price, size, qty });
+        } else {        cart.push({ title: currentModalProduct.title, price: currentModalProduct.price, size, qty });
         }
+        saveCart();
         // Update cart count badge
         const cartCount = document.getElementById('cartCount');
-        if (cartCount) cartCount.textContent = cart.length;
+        if (cartCount) cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
         
         // First close the modal completely
         productInfoModal.classList.add('hidden');
@@ -211,20 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
     cancelProductInfoBtn.onclick = closeProductInfoModal.onclick = function() {
         productInfoModal.classList.add('hidden');
     };
-
-    if (cartBtn) {
-        cartBtn.onclick = function() {
-            if (!cartSidebar.classList.contains('show')) {
-                showCartSidebar();
-            } else {
-                hideCartSidebar();
-            }
-        };
-    }
-
-    if (closeCartSidebar) {
-        closeCartSidebar.onclick = hideCartSidebar;
-    }
 
     // Initialize cart sidebar
     renderCartSidebar();
@@ -269,9 +371,9 @@ function showPurchaseConfirmation() {
     // Handle purchase confirmation
     confirmPurchaseBtn.onclick = function() {
         purchaseAlert.classList.add('hidden');
-        setTimeout(() => {
-            alert('Pembelian berhasil! Terima kasih telah berbelanja.');
+        setTimeout(() => {            alert('Pembelian berhasil! Terima kasih telah berbelanja.');
             cart = [];
+            saveCart();
             const cartCount = document.getElementById('cartCount');
             if (cartCount) cartCount.textContent = '0';
             renderCartSidebar();
@@ -286,7 +388,6 @@ function showPurchaseConfirmation() {
 }
 
 // --- Login Page Logic ---
-// These variables will only be used when on the login page
 const users = [
     { username: "juen", password: "juen" },
     { username: "agung", password: "agung" },
